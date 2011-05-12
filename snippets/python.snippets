@@ -7,6 +7,13 @@ snippet sb
 snippet doc
 	"""${1}"""${2}
 #
+snippet pdb
+	import pdb; pdb.set_trace()
+#
+snippet main
+	if __name__ == '__main__':
+		${1}
+#
 snippet property set/get/del property
 	@apply
 	def ${1:property_name}():
@@ -40,19 +47,18 @@ snippet decorator
 snippet singleton
 	class ${1:SingletonClassName}(${2:object}):
 		"Singleton $1 class"
-		__single = None # true singleton instance
+		__instance = None # shared instance
 		
-		def __init__(self, ${3:}*args, **kwargs):
-			${5:pass}
+		def __init__(self, *args, **kwargs):
+			"""$1 initialization"""
+			${3:pass}
 		
-		def __new__(classtype, $3*args, **kwargs):
-			# Check to see if a __single exists already for this class
-			# Compare class types instead of just looking for None so
-			# that subclasses will create their own __single objects
-			if classtype != type(classtype.__single):
+		def __new__(classtype, *args, **kwargs):
+			"Allow to share a single instance"
+			if not classtype.__instance:
 				classtype.__single = super($1, \
-						$2).__new__($2, ${4:$3*args, **kwargs})
-			return classtype.__single
+						classtype).__new__(classtype, *args, **kwargs)
+			return classtype.__instance
 #
 # New Class
 snippet class super class
