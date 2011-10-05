@@ -1,0 +1,82 @@
+# personal C language snippets
+#
+snippet foo "function with documentation"
+/****************************************************************************
+*  FUNCTION    : ${1:new_function}
+*
+*  INPUTS      : ${4: none}
+*  OUTPUTS     : ${5: none}
+*
+*  DESCRIPTION : ${6: $1 function description}
+****************************************************************************/
+${3:void} $1(${2:void})
+{
+	${7}
+}
+endsnippet
+
+snippet case
+case ${1:CONSTANT}:
+	${2}
+	break;
+endsnippet
+
+snippet switch
+switch ( ${1:variable} )
+{
+case ${2:CONSTANT}:
+	${3}
+	break;
+
+default:
+	break;
+}
+
+endsnippet
+
+# debug macro
+snippet debug
+DEBUG${1}(("\t${2}\n"${3}));${4}
+endsnippet
+
+snippet defdebug
+	#define DEBUG$1(x)		{printf x;}
+endsnippet
+
+snippet ifndef
+#ifdef ${1:FOO}
+    ${2:#define}	${3:$1}
+#endif${4:/* #ifndef $1 */}{$5}
+endsnippet
+
+snippet ifdef
+#ifdef ${1:FOO}
+    ${2:#define}	${3}
+#endif${4:/* #ifdef $1 */}{$5}
+endsnippet
+
+snippet else
+else
+{
+    ${1}
+}
+endsnippet
+#
+snippet elif
+else if ( ${1:/* condition */} )
+{
+    ${2}
+}
+endsnippet
+
+snippet rem
+/* ${1} */${2}
+endsnippet
+
+snippet bk
+{
+    ${0}
+}
+endsnippet
+#
+
