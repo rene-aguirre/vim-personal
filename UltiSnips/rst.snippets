@@ -1,0 +1,50 @@
+# reStructuredText snippets, oriented towards Sphinx documentation
+snippet part "part header" !b
+`!p snip.rv = '#'*len(t[1])`
+${1:Part Header}
+`!p snip.rv = '#'*len(t[1])`
+
+${2}
+endsnippet
+
+snippet chapter "chapter header" !b
+`!p snip.rv = '*'*len(t[1])`
+${1:Chapter Header}
+`!p snip.rv = '*'*len(t[1])`
+
+${2}
+endsnippet
+
+snippet section "section header" !b
+${1:Section Header}
+`!p snip.rv = '='*len(t[1])`
+
+${2}
+endsnippet
+
+snippet sub "sub-section header" !b
+${1:Subsection}
+`!p snip.rv = '-'*len(t[1])`
+
+${2}
+endsnippet
+
+snippet subsub "sub-subsection header" !b
+${1:Sub-subsection}
+`!p snip.rv = '^'*len(t[1])`
+
+${2}
+endsnippet
+
+snippet para "paragraph header" !b
+${1:Paragraph header}
+`!p snip.rv = '"'*len(t[1])`
+
+${2}
+endsnippet
+
+snippet url "inline web link" 
+`$${1: text} <http://$${2:url.com}>`
+endsnippet
+
+
