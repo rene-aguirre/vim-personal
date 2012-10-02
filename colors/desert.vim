@@ -21,28 +21,29 @@ if version > 580
 endif
 let g:colors_name="desert"
 
-hi Normal	guifg=White guibg=grey20
+hi Normal   guifg=White guibg=grey20
 
 " highlight groups
-hi Cursor	guibg=indianred guifg=khaki
+hi Cursor   guibg=indianred guifg=khaki
 "hi CursorIM
 "hi Directory
-"hi DiffAdd
-"hi DiffChange
-"hi DiffDelete
-"hi DiffText
+hi DiffAdd                      guibg=black
+hi DiffChange                   guibg=#474747
+hi DiffDelete   guifg=#a0a0a0   guibg=black
+hi DiffText     guifg=#ff2222   guibg=pink
 "hi ErrorMsg
 hi VertSplit	guibg=#c2bfa5 guifg=grey50 gui=none
 hi Folded	guibg=grey30 guifg=gold
 hi FoldColumn	guibg=grey30 guifg=tan
 hi IncSearch	guifg=slategrey guibg=khaki
-"hi LineNr
+hi LineNr   guifg=gray40
+"hi CursorLineNr
 hi ModeMsg	guifg=goldenrod
 hi MoreMsg	guifg=SeaGreen
-hi NonText	guifg=LightBlue guibg=grey30
+hi NonText	guifg=LightBlue guibg=bg
 hi Question	guifg=springgreen
-hi Search	guibg=grey30 guifg=#dfffdf
-hi SpecialKey	guifg=yellowgreen
+hi Search   guifg=#dfffdf   guibg=grey50
+hi SpecialKey   guifg=yellowgreen
 hi StatusLine	guibg=#c2bfa5 guifg=black gui=none
 hi StatusLineNC	guibg=#c2bfa5 guifg=grey50 gui=none
 hi Title	guifg=indianred
@@ -58,6 +59,7 @@ hi MatchParen guibg=grey30 guifg=#dfffdf
 " syntax highlighting groups
 hi Comment	guifg=SkyBlue
 hi Constant	guifg=#ffa0a0
+hi String   guifg=#e0a5da
 hi Identifier	guifg=palegreen
 hi Statement	guifg=khaki
 hi PreProc	guifg=indianred
@@ -78,6 +80,7 @@ hi Search	cterm=NONE ctermfg=grey ctermbg=blue
 hi MoreMsg	ctermfg=darkgreen
 hi ModeMsg	cterm=NONE ctermfg=brown
 hi LineNr	ctermfg=3
+"hi CursorLineNr
 hi Question	ctermfg=green
 hi StatusLine	cterm=bold,reverse
 hi StatusLineNC cterm=reverse
