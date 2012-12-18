@@ -27,10 +27,10 @@ hi Normal       guifg=White         guibg=grey15
 hi Cursor       guifg=khaki         guibg=indianred
 "hi CursorIM
 "hi Directory
-hi DiffAdd                          guibg=black
-hi DiffChange                       guibg=#474747
-hi DiffDelete   guifg=#a0a0a0       guibg=black
-hi DiffText     guifg=#ff2222       guibg=pink
+hi DiffAdd                          guibg=#575757
+hi DiffChange                       guibg=#575757
+hi DiffDelete   guifg=black         guibg=#575757
+hi DiffText     guifg=#e02222       guibg=#f0e0e0
 "hi ErrorMsg
 hi VertSplit    guifg=grey50        guibg=#c2bfa5   gui=none
 hi Folded       guifg=gold          guibg=grey30        
