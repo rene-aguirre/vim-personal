@@ -1,16 +1,39 @@
 # personal C language snippets
-#
-snippet foodoc "function documentation header" !b
-/*************************************************************************
-NAME
-	${1}
+# sorted alphabetically
 
-DESCRIPTION
+snippet bk
+{
+    ${0}
+}
+endsnippet
+
+snippet case
+case ${1:CONSTANT}:
 	${2}
+	break;
+endsnippet
 
-RETURNS
-	${3}
-**************************************************************************/
+# debug macro
+snippet debug
+DEBUG${2}(("${1:\t}\n"${3}));${4}
+endsnippet
+
+snippet defdebug
+	#define DEBUG$1(x)		{printf x;}
+endsnippet
+
+snippet else
+else
+{
+    ${1}
+}
+endsnippet
+#
+snippet elif
+else if ( ${1:/* condition */} )
+{
+    ${2}
+}
 endsnippet
 
 snippet foo "function with documentation"
@@ -28,31 +51,17 @@ ${3:void} $1(${2:void})
 }
 endsnippet
 
-snippet case
-case ${1:CONSTANT}:
+snippet foodoc "function documentation header" !b
+/*************************************************************************
+NAME
+	${1}
+
+DESCRIPTION
 	${2}
-	break;
-endsnippet
 
-snippet switch
-switch ( ${1:variable} )
-{
-case ${2:CONSTANT}:
+RETURNS
 	${3}
-	break;
-
-default:
-	break;
-}
-endsnippet
-
-# debug macro
-snippet debug
-DEBUG${2}(("${1:\t}\n"${3}));${4}
-endsnippet
-
-snippet defdebug
-	#define DEBUG$1(x)		{printf x;}
+**************************************************************************/
 endsnippet
 
 snippet ifndef
@@ -67,28 +76,35 @@ snippet ifdef
 #endif${4:/* #ifdef $1 */}{$5}
 endsnippet
 
-snippet else
-else
+snippet main "Full main boostrap" !b
+#include <errno.h>
+#include <math.h>  
+#include <stdio.h> 
+#include <stdlib.h>
+#include <string.h>
+
+int main ( int argc, char *argv[] )
 {
+	printf ("\nProgram %s\n\n", argv[0] );
     ${1}
-}
-endsnippet
-#
-snippet elif
-else if ( ${1:/* condition */} )
-{
-    ${2}
+
+	return EXIT_SUCCESS;
 }
 endsnippet
 
 snippet rem
 /* ${1} */${2}
 endsnippet
-
-snippet bk
+#
+snippet switch
+switch ( ${1:variable} )
 {
-    ${0}
+case ${2:CONSTANT}:
+	${3}
+	break;
+
+default:
+	break;
 }
 endsnippet
-#
 
