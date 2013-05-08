@@ -109,5 +109,7 @@ hi Ignore       cterm=  bold          ctermfg=7
 hi Ignore       ctermfg=darkgrey
 hi Error        cterm=  bold          ctermfg=7   ctermbg=1
 
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%81v.\+/
 
 "vim: sw=4
