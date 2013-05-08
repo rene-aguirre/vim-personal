@@ -66,7 +66,7 @@ else
   syn region	kalimbaComment	matchgroup=cCommentStart start="/\*" end="\*/" contains=kalimbaTodo fold extend
 endif
 " Include
-syn match kalimbaInclude		"\.\<include\s"
+syn match kalimbaInclude		"^\s*\(\.\|#\)\<include\>"
 
 syn match kalimbaRepeat	        "\<do\>"
 
@@ -79,13 +79,13 @@ syn match kalimbaDirective      "\.\<VAR\>"
 syn match kalimbaDirective      "\.\<CONST\>"
 
 " Conditional assembly
-syn match kalimbaPreCond		"\.\<IF\s"
-syn match kalimbaPreCond		"\.\<IFDEF\s"
-syn match kalimbaPreCond		"\.\<IFNDEF\s"
-syn match kalimbaPreCond		"\.\<ELIF\s"
-syn match kalimbaPreCond		"\.\<ELSE\>"
-syn match kalimbaPreCond		"\.\<ENDIF\>"
-syn match kalimbaPreCond		"\.\<DEFINE\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<IF\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<IFDEF\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<IFNDEF\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<ELIF\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<ELSE\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<ENDIF\>"
+syn match kalimbaPreCond		"^\s*\(\.\|#\)\<DEFINE\>"
 
 syn case match
 
@@ -124,7 +124,7 @@ if version >= 508 || !exists("did_kalimba_syntax_inits")
   HiLink kalimbaSymbol		Constant
   HiLink kalimbaGlobal          Special
 
-  " HiLink kalimbaString		String		" Constant
+  HiLink kalimbaString		String		" Constant
   " HiLink kalimbaCharError	Error
   " HiLink kalimbaStringError	Error
 
