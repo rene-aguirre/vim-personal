@@ -32,7 +32,7 @@ hi DiffChange                       guibg=#575757
 hi DiffDelete   guifg=black         guibg=#575757
 hi DiffText     guifg=#e02222       guibg=#f0e0e0
 "hi ErrorMsg
-hi VertSplit    guifg=grey50        guibg=#c2bfa5   gui=none
+hi VertSplit    guifg=grey20        guibg=#c2bfa5   gui=none
 hi Folded       guifg=gold          guibg=grey30        
 hi FoldColumn   guifg=tan           guibg=grey30        
 hi IncSearch    guifg=slategrey     guibg=khaki
