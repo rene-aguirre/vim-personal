@@ -1,0 +1,28 @@
+# personal Kalimba Assembly language snippets
+
+snippet module
+// *****************************************************************************
+// MODULE:
+//    $${1}
+//
+// DESCRIPTION:
+//    ${2}
+//
+// INPUTS:
+//    - ${3: none}
+//
+// OUTPUTS:
+//    - ${4: none}
+// *****************************************************************************
+.MODULE $M.$1;
+	.CODESEGMENT PM;
+	.DATASEGMENT DM;
+
+$$1:
+	$push_rLink_macro;
+
+	jump $pop_rLink_and_rts;
+
+.ENDMODULE;
+endsnippet
+
