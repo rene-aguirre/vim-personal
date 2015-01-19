@@ -24,10 +24,10 @@ def ${1:property_name}():
     doc = """The $1 property"""
     def fset(self, ${3:value}):
         self._${2:$1} = ${4:$3}
-    
+
     def fget(self):
         return ${5:self._$2}
-    
+
     def fdel(self):
         del self._$2
     return property(**locals())
@@ -54,11 +54,11 @@ snippet singleton "singleton class"
 class ${1:SingletonClassName}(${2:object}):
     "Singleton $1 class"
     __instance = None # shared instance
-    
+
     def __init__(self, *args, **kwargs):
         """$1 initialization"""
         ${3:pass}
-    
+
     def __new__(classtype, *args, **kwargs):
         "Allow to share a single instance"
         if not classtype.__instance:

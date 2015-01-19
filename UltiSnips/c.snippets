@@ -3,7 +3,7 @@
 
 snippet bk
 {
-    ${0}
+	${1}
 }
 endsnippet
 
@@ -18,33 +18,20 @@ snippet debug
 DEBUG${2}(("${1:\t}\n"${3}));${4}
 endsnippet
 
-snippet defdebug
-	#define DEBUG$1(x)		{printf x;}
-endsnippet
-
 snippet else
 else
 {
-    ${1}
-}
-endsnippet
-#
-snippet elif
-else if ( ${1:/* condition */} )
-{
-    ${2}
+	${1}
 }
 endsnippet
 
-snippet foo "function with documentation"
-/****************************************************************************
-*  FUNCTION    : ${1:new_function}
-*
-*  INPUTS      : ${4: none}
-*  OUTPUTS     : ${5: none}
-*
-*  DESCRIPTION : ${6: $1 function description}
-****************************************************************************/
+snippet elif
+else if ( ${1:/* condition */} ) {
+	${2}
+}
+endsnippet
+
+snippet foo "simple function"
 ${3:void} $1(${2:void})
 {
 	${7}
@@ -52,16 +39,11 @@ ${3:void} $1(${2:void})
 endsnippet
 
 snippet foodoc "function documentation header" !b
-/*************************************************************************
-NAME
-	${1}
+/** @brief ${1}
 
-DESCRIPTION
-	${2}
-
-RETURNS
-	${3}
-**************************************************************************/
+@param  ${2}
+@return ${3}
+*/
 endsnippet
 
 snippet ifndef
@@ -75,6 +57,21 @@ snippet ifdef
 	${2:#define}	${3}
 #endif${4:/* #ifdef $1 */}{$5}
 endsnippet
+snippet once "Include header once only guard"
+#ifndef ${1:`!p
+if not snip.c:
+	import random, string
+	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+	snip.rv = ('__%s_%s__' % (name,rand)).upper()
+else:
+	snip.rv = snip.c`}
+#define $1
+
+${0}
+
+#endif /* $1 */
+endsnippet
 
 snippet main "Full main boostrap" !b
 #include <errno.h>
@@ -86,7 +83,7 @@ snippet main "Full main boostrap" !b
 int main ( int argc, char *argv[] )
 {
 	printf ("\nProgram %s\n\n", argv[0] );
-    ${1}
+	${1}
 
 	return EXIT_SUCCESS;
 }
@@ -106,5 +103,13 @@ case ${2:CONSTANT}:
 default:
 	break;
 }
+endsnippet
+
+snippet dox "Doxygen general comment"
+/*! ${1} */${2}
+endsnippet
+
+snippet doxe "Doxygen enum comment"
+/*!< ${1} */${2}
 endsnippet
 
