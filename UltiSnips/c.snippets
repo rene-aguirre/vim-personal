@@ -18,6 +18,10 @@ snippet debug
 DEBUG${2}(("${1:\t}\n"${3}));${4}
 endsnippet
 
+snippet doc "generic doxygen doc"
+/*! $0 */
+endsnippet
+
 snippet else
 else
 {
@@ -39,7 +43,7 @@ ${3:void} $1(${2:void})
 endsnippet
 
 snippet foodoc "function documentation header" !b
-/** @brief ${1}
+/*! @brief ${1}
 
 @param  ${2}
 @return ${3}
@@ -57,6 +61,7 @@ snippet ifdef
 	${2:#define}	${3}
 #endif${4:/* #ifdef $1 */}{$5}
 endsnippet
+
 snippet once "Include header once only guard"
 #ifndef ${1:`!p
 if not snip.c:
@@ -87,6 +92,10 @@ int main ( int argc, char *argv[] )
 
 	return EXIT_SUCCESS;
 }
+endsnippet
+
+snippet mdoc "member doxygen doc"
+/*!< $0 */
 endsnippet
 
 snippet rem
