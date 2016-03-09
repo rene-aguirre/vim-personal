@@ -45,7 +45,7 @@ def ${1:decorator_name}(func):
     $2.__name__ = func.__name__
     $2.__doc__ = func.__doc__
     $2.__dict__.update(func.__dict__)
-    
+
     return $2
 ${5}
 endsnippet
@@ -150,9 +150,9 @@ if __name__ == '__main__':
 
     # basic logging configuration
     logging.basicConfig(level=logging_level)
-    
+
     sys.exit( main(options, arg_list) )
-endsnippet	 
+endsnippet
 
 snippet module "simple argparse template"
 #!/usr/bin/env python
@@ -171,18 +171,17 @@ A python script template.
 __version__ = "0.0.1"
 
 def main(arguments):
- 
-    parser = argparse.ArgumentParser(description=__doc__, 
-            formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('infile', help = "A required input file", 
-            type = argparse.FileType('r'))
-    parser.add_argument('outfile', help = "A required output file",
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument('infile', help="A required input file",
+                        type=argparse.FileType('r'))
+    parser.add_argument('outfile', help="A required output file",
                         type = argparse.FileType('w'))
     parser.add_argument('-a', '--abacad', help='An option')
-    parser.add_argument('-b', '--blabacab', help = "Another option")
+    parser.add_argument('-b', '--blabacab', help="Another option")
 
     args = parser.parse_args(arguments)
-    
+
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
 

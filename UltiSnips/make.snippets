@@ -1,0 +1,23 @@
+snippet "quick" "Quick template for C compilation"
+TARGET := ${1:myscript}
+SRCS := $(wildcard src/*.c)
+OBJS := $(SRCS:src/%.c=build/%.o)
+
+# Track include dependencies
+CFLAGS += -MMD -MP
+
+build/%.o : src/%.c | build
+	$(CC) $(CFLAGS) -c $< -o $@
+
+build/${1} : $(OBJ) | build
+	$(CC) $(LDFLAGS) $^ -o $@
+
+build :
+	mkdir build
+
+clean :
+	rm -rf build
+
+-include $(OBJS:.o=.d)
+endsnippet
+

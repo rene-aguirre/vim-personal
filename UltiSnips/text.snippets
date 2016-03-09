@@ -1,0 +1,12 @@
+snippet date! "Include header once only guard"
+${1:`!p
+if not snip.c:
+	import datetime
+	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+	snip.rv = ('__%s_%s__' % (name,rand)).upper()
+	snip.rv = datetime.datetime.now().strftime("%m/%d/%Y")
+else:
+	snip.rv = snip.c`}
+endsnippet
+
