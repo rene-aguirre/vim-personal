@@ -1,6 +1,12 @@
 # personal C language snippets
 # sorted alphabetically
 
+snippet brief "doxygen brief comment"
+/**
+ * @brief $0
+ */
+endsnippet
+
 snippet bk
 {
 	${1}
@@ -19,7 +25,7 @@ DEBUG${2}(("${1:\t}\n"${3}));${4}
 endsnippet
 
 snippet doc "generic doxygen doc"
-/*! $0 */
+/*! ${1} */
 endsnippet
 
 snippet else
@@ -43,10 +49,11 @@ ${3:void} $1(${2:void})
 endsnippet
 
 snippet foodoc "function documentation header" !b
-/*! \brief ${1}
-
-\param  ${2}
-\return ${3}
+/**
+ * @brief ${1}
+ *
+ * @param  ${2}
+ * @return ${3}
 */
 endsnippet
 
