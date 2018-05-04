@@ -15,67 +15,65 @@ endsnippet
 #
 snippet main "main module"
 if __name__ == '__main__':
-    ${1}
+	${1}
 endsnippet
 #
 snippet property "set/get/del property"
 @apply
 def ${1:property_name}():
-    doc = """The $1 property"""
-    def fset(self, ${3:value}):
-        self._${2:$1} = ${4:$3}
+	doc = """The $1 property"""
+	def fset(self, ${3:value}):
+		self._${2:$1} = ${4:$3}
 
-    def fget(self):
-        return ${5:self._$2}
+	def fget(self):
+		return ${5:self._$2}
 
-    def fdel(self):
-        del self._$2
-    return property(**locals())
+	def fdel(self):
+		del self._$2
+	return property(**locals())
 ${6}
 endsnippet
 #
 snippet decorator "function decorator "
 def ${1:decorator_name}(func):
-    """The $1 decorator"""
-    def ${2:new_decorator}(*args, **kwargs):
-        #${3:doing something useful with decorated function}
-        ${4:return func(*args, **kwargs)}
+	"""The $1 decorator"""
+	def ${2:new_decorator}(*args, **kwargs):
+		#${3:doing something useful with decorated function}
+		${4:return func(*args, **kwargs)}
 
-    # be a well-behaved decorator.
-    $2.__name__ = func.__name__
-    $2.__doc__ = func.__doc__
-    $2.__dict__.update(func.__dict__)
+	# be a well-behaved decorator.
+	$2.__name__ = func.__name__
+	$2.__doc__ = func.__doc__
+	$2.__dict__.update(func.__dict__)
 
-    return $2
+	return $2
 ${5}
 endsnippet
 #
 snippet singleton "singleton class"
 class ${1:SingletonClassName}(${2:object}):
-    "Singleton $1 class"
-    __instance = None # shared instance
+	"Singleton $1 class"
+	__instance = None # shared instance
 
-    def __init__(self, *args, **kwargs):
-        """$1 initialization"""
-        ${3:pass}
+	def __init__(self, *args, **kwargs):
+		"""$1 initialization"""
+		${3:pass}
 
-    def __new__(classtype, *args, **kwargs):
-        "Allow to share a single instance"
-        if not classtype.__instance:
-            classtype.__single = super($1, \
-                    classtype).__new__(classtype, *args, **kwargs)
-        return classtype.__instance
+	def __new__(classtype, *args, **kwargs):
+		"Allow to share a single instance"
+		if not classtype.__instance:
+			classtype.__single = super($1, classtype).__new__(classtype, *args, **kwargs)
+		return classtype.__instance
 endsnippet
-#
-# New Class
+
 snippet class "super class"
 class ${1:ClassName}(${2}):
-    """${3:docstring for $1}"""
-    def __init__(self, ${4:*args, **kw}):
-        super($1, self).__init__(${5:$4})
-        ${6}
+	"""${3:docstring for $1}"""
+	def __init__(self, ${4:*args, **kw}):
+		super($1, self).__init__(${5:$4})
+		${6}
 endsnippet
-#
+
 snippet class "normal class"
 	class ${1:ClassName}(${2:}):
 		"""${3:docstring for $1}"""
@@ -84,80 +82,11 @@ snippet class "normal class"
 			${6}
 endsnippet
 #
-snippet module "default template for a module"
-#!/usr/bin/env python
-# -*- coding: `!v printf("%s",&fileencoding == "" ? (&encoding == "latin1" ? "latin-1" : &encoding) : (&fileencoding == "latin1" ? "latin-1" : &fileencoding))` -*-
-import logging
-
-#version string
-__version__ = "0.0.1"
-
-def test_messages():
-    #change verbosity to test the messages
-    logging.debug("This is a debug message")
-    logging.info("This is an info message")
-    logging.warn("This is a warning message")
-    logging.error("This is an error message")
-    try:
-        raise Exception("This is an exception (error) message")
-    except Exception:
-        logging.exception("This is an error message with traceback info (logging.exception):")
-
-if __name__ == '__main__':
-    import sys
-    import optparse
-
-    def main(options, args):
-        "${1:A simple script}"
-        # this doc string is used for the script description
-        # give a brief overview of your program
-        if not args:
-            sys.stderr.write("No arguments!\n")
-        elif len(args) > 1:
-            print "A single script argument:", args[0]
-        else:
-            print "These are the arguments:", args
-        print '\n',
-        ${2:#write, here your code}
-        test_messages()
-        # return error level
-        return 0
-
-    option_parser = optparse.OptionParser(version = "%prog " + __version__)
-    # part of the usage text (--help), located before the options list
-    option_parser.description = main.__doc__
-    # add our options
-    option_parser.add_option('-v', '--verbose', action='store', type="string", dest='verbose', 
-                    help="set verbosity (critical, error, warning, info, debug), defaults\
-                            to warning")
-    # parse the arguments (defaults to parsing sys.argv)
-    options, arg_list = option_parser.parse_args()
-
-    logging_level = logging.WARNING
-    verbosity = {
-        'debug': logging.DEBUG,
-        'info': logging.INFO,
-        'warning': logging.WARNING,
-        'error': logging.ERROR,
-        'critical': logging.CRITICAL
-    }
-    if options.verbose:
-        if options.verbose.lower() in verbosity:
-            logging_level = verbosity.get(options.verbose.lower())
-        else:
-            option_parser.error("I don't know about '%s' verbosity" % options.verbose)
-    # add further options validation
-
-    # basic logging configuration
-    logging.basicConfig(level=logging_level)
-
-    sys.exit( main(options, arg_list) )
+snippet info "Logging info" !b
+logging.info("${1:variable}: ${4:{0}}".format( ${3:$1} ))${2}
 endsnippet
 
 snippet module "simple argparse template"
-#!/usr/bin/env python
-# -*- coding: `!v printf("%s",&fileencoding == "" ? (&encoding == "latin1" ? "latin-1" : &encoding) : (&fileencoding == "latin1" ? "latin-1" : &fileencoding))` -*-
-
 import os
 import sys
 import argparse
@@ -171,23 +100,87 @@ A python script template.
 __version__ = "0.0.1"
 
 def main(arguments):
-    parser = argparse.ArgumentParser(description=__doc__,
-                                     formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('infile', help="A required input file",
-                        type=argparse.FileType('r'))
-    parser.add_argument('outfile', help="A required output file",
-                        type = argparse.FileType('w'))
-    parser.add_argument('-a', '--abacad', help='An option')
-    parser.add_argument('-b', '--blabacab', help="Another option")
+	parser = argparse.ArgumentParser(description=__doc__,
+									formatter_class=argparse.RawDescriptionHelpFormatter)
+	parser.add_argument('infile', help="A required input file",
+						type=argparse.FileType('r'))
+	parser.add_argument('outfile', help="A required output file",
+						type = argparse.FileType('w'))
+	parser.add_argument('-a', '--abacad', help='An option')
+	parser.add_argument('-b', '--blabacab', help="Another option")
 
-    args = parser.parse_args(arguments)
+	args = parser.parse_args(arguments)
 
 if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+	sys.exit(main(sys.argv[1:]))
 
 endsnippet
 
-snippet info "Logging info" !b
-logging.info("${1:variable}: ${4:{0}}".format( ${3:$1} ))${2}
+snippet logging "default template for a module"
+import logging
+
+#version string
+__version__ = "0.0.1"
+
+def test_messages():
+	#change verbosity to test the messages
+	logging.debug("This is a debug message")
+	logging.info("This is an info message")
+	logging.warn("This is a warning message")
+	logging.error("This is an error message")
+	try:
+		raise Exception("This is an exception (error) message")
+	except Exception:
+		logging.exception("This is an error message with traceback info (logging.exception):")
+
+if __name__ == '__main__':
+	import sys
+	import optparse
+
+	def main(options, args):
+		"${1:A simple script}"
+		# this doc string is used for the script description
+		# give a brief overview of your program
+		if not args:
+			sys.stderr.write("No arguments!\n")
+		elif len(args) > 1:
+			print "A single script argument:", args[0]
+		else:
+			print "These are the arguments:", args
+		print '\n',
+		${2:#write here your code}
+		test_messages()
+		# return error level
+		return 0
+
+	option_parser = optparse.OptionParser(version = "%prog " + __version__)
+	# part of the usage text (--help), located before the options list
+	option_parser.description = main.__doc__
+	# add our options
+	option_parser.add_option('-v', '--verbose', action='store', type="string", dest='verbose', 
+					help="set verbosity (critical, error, warning, info, debug), defaults\
+							to warning")
+	# parse the arguments (defaults to parsing sys.argv)
+	options, arg_list = option_parser.parse_args()
+
+	logging_level = logging.WARNING
+	verbosity = {
+		'debug': logging.DEBUG,
+		'info': logging.INFO,
+		'warning': logging.WARNING,
+		'error': logging.ERROR,
+		'critical': logging.CRITICAL
+	}
+	if options.verbose:
+		if options.verbose.lower() in verbosity:
+			logging_level = verbosity.get(options.verbose.lower())
+		else:
+			option_parser.error("I don't know about '%s' verbosity" % options.verbose)
+	# add further options validation
+
+	# basic logging configuration
+	logging.basicConfig(level=logging_level)
+
+	sys.exit( main(options, arg_list) )
 endsnippet
 
