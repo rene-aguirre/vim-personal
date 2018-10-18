@@ -19,13 +19,40 @@ case ${1:CONSTANT}:
 	break;
 endsnippet
 
+snippet copyright
+// Copyright (C) 2018 ${1:AUTHOR}. All rights reserved.
+//
+// This document is the property of $1.
+// It is considered confidential and proprietary.
+//
+// This document may not be reproduced or transmitted in any form,
+// in whole or in part, without the express written permission of
+// $1.
+${2}
+endsnippet
+
+snippet cppguard
+#pragma once
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+${1}
+
+#ifdef __cplusplus
+}
+#endif
+endsnippet
+
+snippet dox "Doxygen general comment"
+/**
+ * ${1}
+ */${2}
+endsnippet
+
 # debug macro
 snippet debug
 DEBUG${2}(("${1:\t}\n"${3}));${4}
-endsnippet
-
-snippet doc "generic doxygen doc"
-/*! ${1} */
 endsnippet
 
 snippet else
@@ -57,6 +84,10 @@ snippet foodoc "function documentation header" !b
 */
 endsnippet
 
+snippet here
+fprintf(stderr, "%s: l=%d\n", __FUNCTION__, __LINE__);
+endsnippet
+
 snippet ifndef
 #ifdef ${1:FOO}
 	${2:#define}	${3:$1}
@@ -69,7 +100,12 @@ snippet ifdef
 #endif${4:/* #ifdef $1 */}{$5}
 endsnippet
 
-snippet once "Include header once only guard"
+snippet once
+#pragma once
+${1}
+endsnippet
+
+snippet onceguard "Include header once only guard"
 #ifndef ${1:`!p
 if not snip.c:
 	import random, string
@@ -101,14 +137,14 @@ int main ( int argc, char *argv[] )
 }
 endsnippet
 
-snippet mdoc "member doxygen doc"
-/*!< $0 */
+snippet mdoc "doxygen member/attribute documentation"
+//!< ${1}
 endsnippet
 
 snippet rem
 /* ${1} */${2}
 endsnippet
-#
+
 snippet switch
 switch ( ${1:variable} )
 {
@@ -119,13 +155,5 @@ case ${2:CONSTANT}:
 default:
 	break;
 }
-endsnippet
-
-snippet dox "Doxygen general comment"
-/*! ${1} */${2}
-endsnippet
-
-snippet doxe "Doxygen enum comment"
-/*!< ${1} */${2}
 endsnippet
 

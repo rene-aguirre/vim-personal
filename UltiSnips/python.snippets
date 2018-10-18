@@ -1,37 +1,19 @@
 #personal python snippets
-snippet sb
-#!/usr/bin/env python
-# -*- coding: `!v printf("%s",&fileencoding == "" ? (&encoding == "latin1" ? "latin-1" : &encoding) : (&fileencoding == "latin1" ? "latin-1" : &fileencoding))` -*-
-${2}
-endsnippet
 #
-snippet doc
-"""${1}"""${2}
+snippet class "super class"
+class ${1:ClassName}(${2}):
+	"""${3:docstring for $1}"""
+	def __init__(self, ${4:*args, **kw}):
+		super($1, self).__init__(${5:$4})
+		${6}
 endsnippet
-#
-snippet pdb
-import pdb; pdb.set_trace()
-endsnippet
-#
-snippet main "main module"
-if __name__ == '__main__':
-	${1}
-endsnippet
-#
-snippet property "set/get/del property"
-@apply
-def ${1:property_name}():
-	doc = """The $1 property"""
-	def fset(self, ${3:value}):
-		self._${2:$1} = ${4:$3}
 
-	def fget(self):
-		return ${5:self._$2}
-
-	def fdel(self):
-		del self._$2
-	return property(**locals())
-${6}
+snippet class "normal class"
+	class ${1:ClassName}(${2:}):
+		"""${3:docstring for $1}"""
+		def __init__(self, ${4:}):
+			$2.__init__(${5:$4})
+			${6}
 endsnippet
 #
 snippet decorator "function decorator "
@@ -50,70 +32,26 @@ def ${1:decorator_name}(func):
 ${5}
 endsnippet
 #
-snippet singleton "singleton class"
-class ${1:SingletonClassName}(${2:object}):
-	"Singleton $1 class"
-	__instance = None # shared instance
+snippet doc
+"""${1}"""${2}
+endsnippet
+#
+snippet foodoc
+"""${1}
+Args:
+	${2: param1} ${3:int}: 	${4:param1 description}
 
-	def __init__(self, *args, **kwargs):
-		"""$1 initialization"""
-		${3:pass}
-
-	def __new__(classtype, *args, **kwargs):
-		"Allow to share a single instance"
-		if not classtype.__instance:
-			classtype.__single = super($1, classtype).__new__(classtype, *args, **kwargs)
-		return classtype.__instance
+Returns:
+	${5: sometype}: ${6: The return value.}
+"""${7}
 endsnippet
 
-snippet class "super class"
-class ${1:ClassName}(${2}):
-	"""${3:docstring for $1}"""
-	def __init__(self, ${4:*args, **kw}):
-		super($1, self).__init__(${5:$4})
-		${6}
-endsnippet
-
-snippet class "normal class"
-	class ${1:ClassName}(${2:}):
-		"""${3:docstring for $1}"""
-		def __init__(self, ${4:}):
-			$2.__init__(${5:$4})
-			${6}
+snippet fooparam
+${1: param} ${2:int}: 	${3:param description}
 endsnippet
 #
 snippet info "Logging info" !b
 logging.info("${1:variable}: ${4:{0}}".format( ${3:$1} ))${2}
-endsnippet
-
-snippet module "simple argparse template"
-import os
-import sys
-import argparse
-
-"""
-A python script template.
-
-"""
-
-#version string
-__version__ = "0.0.1"
-
-def main(arguments):
-	parser = argparse.ArgumentParser(description=__doc__,
-									formatter_class=argparse.RawDescriptionHelpFormatter)
-	parser.add_argument('infile', help="A required input file",
-						type=argparse.FileType('r'))
-	parser.add_argument('outfile', help="A required output file",
-						type = argparse.FileType('w'))
-	parser.add_argument('-a', '--abacad', help='An option')
-	parser.add_argument('-b', '--blabacab', help="Another option")
-
-	args = parser.parse_args(arguments)
-
-if __name__ == '__main__':
-	sys.exit(main(sys.argv[1:]))
-
 endsnippet
 
 snippet logging "default template for a module"
@@ -184,3 +122,93 @@ if __name__ == '__main__':
 	sys.exit( main(options, arg_list) )
 endsnippet
 
+snippet main "main module"
+if __name__ == '__main__':
+	${1}
+endsnippet
+#
+snippet module "simple argparse template"
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+A python script template.
+
+"""
+
+import sys
+import argparse
+
+__version__ = "0.0.1"
+
+def get_arg_parser():
+	"""Create CLI Argument parser instance
+	"""
+	parser = argparse.ArgumentParser(description=__doc__,
+	                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+	parser.add_argument('infile', type=argparse.FileType('r'),
+	                    help="A required input file")
+	parser.add_argument('-o', '--outfile', type=argparse.FileType('w'), default=sys.stdout,
+	                    help="Target output file")
+	parser.add_argument('-a', '--abacad', help='An option')
+	parser.add_argument('-b', '--blabacab', help="Another option")
+
+	return parser
+
+def main(arguments):
+	"""CLI standalone entry point"""
+	parser = get_arg_parser()
+	args = parser.parse_args(arguments)
+
+if __name__ == '__main__':
+	sys.exit(main(sys.argv[1:]))
+endsnippet
+
+snippet pdb
+import pdb; pdb.set_trace()
+endsnippet
+#
+snippet property "set/get/del property"
+@apply
+def ${1:property_name}():
+	doc = """The $1 property"""
+	def fset(self, ${3:value}):
+		self._${2:$1} = ${4:$3}
+
+	def fget(self):
+		return ${5:self._$2}
+
+	def fdel(self):
+		del self._$2
+	return property(**locals())
+${6}
+endsnippet
+#
+snippet sb
+#!/usr/bin/env python
+# -*- coding: `!v printf("%s",&fileencoding == "" ? (&encoding == "latin1" ? "latin-1" : &encoding) : (&fileencoding == "latin1" ? "latin-1" : &fileencoding))` -*-
+${2}
+endsnippet
+#
+snippet singleton "singleton class"
+class ${1:SingletonClassName}(${2:object}):
+	"Singleton $1 class"
+	__instance = None # shared instance
+
+	def __init__(self, *args, **kwargs):
+		"""$1 initialization"""
+		${3:pass}
+
+	def __new__(classtype, *args, **kwargs):
+		"Allow to share a single instance"
+		if not classtype.__instance:
+			classtype.__single = super($1, classtype).__new__(classtype, *args, **kwargs)
+		return classtype.__instance
+endsnippet
+
+snippet testclasss "PyTest helper class"
+class Test${1:Helper}(object):
+	"""Unit test helper"""
+	def test_{2:foo}(self): #pylint: disable=no-self-use, missing-docstring
+		assert ${3:False}
+endsnippet
