@@ -1,0 +1,20 @@
+snippet usage
+show_usage() { 
+	echo "This script does XYZ."
+	echo -e "\nUsage:\n$0 [arguments] \n"
+}
+
+# needs more than 2 arguments ( <= 1 shows usage)
+if [  $# -le 1 ]
+then
+	show_usage
+	exit 1
+fi
+
+if [[ ( $# == "--help") ||  $# == "-h" ]] 
+then
+	show_usage
+	exit 0
+fi
+
+endsnippet
