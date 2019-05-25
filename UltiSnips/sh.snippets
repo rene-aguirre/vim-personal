@@ -1,3 +1,42 @@
+snippet args
+"$@"
+endsnippet
+
+snippet array
+# index: "${ARRAY[1]}", iterate: "${ARRAY[@]}"
+${1:array_var}=(
+	${0:${VISUAL}}
+)
+endsnippet
+
+snippet bash
+#!/usr/bin/env bash
+endsnippet
+
+snippet cmdexists
+[ -x "$(command -v ${1:cmd})" ] ${2}
+endsnippet
+
+snippet fileexists
+[ -f ${1:filename} ] ${2}
+endsnippet
+
+snippet forin
+for ${1:variable} in ${2:list} ; do
+	${0:${VISUAL}}
+done
+endsnippet
+
+snippet forarray
+for ${1:variable} in "$${2:ARRAY}[@]" ; do
+	${0:${VISUAL}}
+done
+endsnippet
+
+snippet sh
+#!/usr/bin/env sh
+endsnippet
+
 snippet usage
 show_usage() { 
 	echo "This script does XYZ."
@@ -5,16 +44,15 @@ show_usage() {
 }
 
 # needs more than 2 arguments ( <= 1 shows usage)
-if [  $# -le 1 ]
-then
+if [  $# -le 1 ]; then
 	show_usage
 	exit 1
 fi
 
-if [[ ( $# == "--help") ||  $# == "-h" ]] 
-then
+if [[ ( $# == "--help") ||  $# == "-h" ]]; then
 	show_usage
 	exit 0
 fi
 
 endsnippet
+
