@@ -46,7 +46,7 @@ function! Runners()
                     \ . GetVar("cc_flags", "-Wall -Werror") . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif (&ft=='cpp')
         command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
-                    \ . GetVar("cxx_flags", "-std=c++14 -Wall -Werror") . " % -o vrun.out && ./vrun.out && rm vrun.out"
+                    \ . GetVar("cxx_flags", "-std=c++17 -Wall -Werror") . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif ((&ft=='rust') && filereadable("./Cargo.toml"))
         " Cargo managed project
         if (filereadable("./src/main.rs"))
