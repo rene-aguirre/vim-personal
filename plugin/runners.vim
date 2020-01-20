@@ -43,10 +43,14 @@ function! Runners()
         :command! Run up % | Shell bash %
     elseif (&ft=='c')
         command! Run up % | execute "Shell " . GetVar("cc", "cc") . " "
-                    \ . GetVar("cc_flags", "-Wall -Werror") . " % -o vrun.out && ./vrun.out && rm vrun.out"
+                    \ . GetVar("cc_flags",
+                        \ system("paste -s -d ' ' compile_flags.txt 2>/dev/null || echo '-std=c11 -Wall -Werror'"))
+                    \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif (&ft=='cpp')
         command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
-                    \ . GetVar("cxx_flags", "-std=c++17 -Wall -Werror") . " % -o vrun.out && ./vrun.out && rm vrun.out"
+                    \ . GetVar("cxx_flags", 
+                        \ system("paste -s -d ' ' compile_flags.txt 2>/dev/null || echo '-std=c++17 -Wall -Werror'"))
+                    \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif ((&ft=='rust') && filereadable("./Cargo.toml"))
         " Cargo managed project
         if (filereadable("./src/main.rs"))
