@@ -1,0 +1,193 @@
+# common
+snippet start
+@startuml
+	${0}
+@enduml
+endsnippet
+
+# design
+snippet rectangle
+rectangle ${1} {
+	$0
+}
+endsnippet
+
+
+# allows
+snippet associates
+${1} --> ${2}
+endsnippet
+
+snippet associated
+${1} <-- ${2}
+endsnippet
+
+snippet depends
+${1} ..> ${2}
+endsnippet
+
+snippet depended
+<.. ${1}
+endsnippet
+
+snippet extends
+--|> ${1}
+endsnippet
+snippet extended
+<|-- ${1}
+endsnippet
+snippet implements
+..|> ${1}
+endsnippet
+snippet implemented
+<|.. ${1}
+endsnippet
+snippet composed
+--* ${1}
+endsnippet
+snippet composes
+*-- ${1}
+endsnippet
+snippet belongs
+--o ${1}
+endsnippet
+snippet has
+o-- "${1}" $0
+endsnippet
+
+snippet nodel
+node left of ${1}
+endsnippet
+snippet noder
+node right of ${1}
+endsnippet
+snippet nodet
+node top of ${1}
+endsnippet
+snippet nodeb
+node bottom of ${1}
+endsnippet
+snippet right
+${1} -right-> ${2}
+endsnippet
+snippet left
+${1} -left-> ${2}
+endsnippet
+snippet up
+${1} -up-> ${2}
+endsnippet
+snippet down
+${1} -down-> ${2}
+endsnippet
+
+
+# sequence
+snippet message
+${1} -> ${2}: ${3}
+endsnippet
+snippet message2
+${1} -> ${2}: ${3}
+${1} <-- ${2}: ${4}
+endsnippet
+snippet message3
+${1} -> ${2}: ${3}
+activate
+${1} <-- ${2}: ${4}
+destroy
+endsnippet
+
+snippet boundary
+boundary ${1:boundary}
+endsnippet
+snippet control
+control ${1:control}
+endsnippet
+snippet entity
+entity ${1:entity}
+endsnippet
+snippet database
+database ${1:database}
+endsnippet
+
+snippet alt
+alt ${1:success case}
+	$3
+else ${2:else case}
+	$4
+end
+endsnippet
+
+
+# usecase
+snippet usecase
+(${1:name})
+snippet usecaseas
+(${1:name}) as ${2:alias}
+endsnippet
+
+snippet actor
+:${1:name}:
+endsnippet
+snippet actoras
+:${1:name}: as ${2:alias}
+endsnippet
+
+
+# class diagram
+snippet class
+class ${1:name}
+endsnippet
+
+snippet classb
+class ${1:name} {
+	${0}
+}
+endsnippet
+
+snippet static
+{static} ${1:type} ${2:var}
+endsnippet
+
+snippet abstract
+{abstract} ${1:type} ${2:method}(${3})
+endsnippet
+
+snippet private
+- ${1:type} ${2:var}
+endsnippet
+snippet private2
+- ${1:type} ${2:method}(${3})
+endsnippet
+
+snippet protected
+# ${1:type} ${2:var}
+endsnippet
+snippet protected2
+# ${1:type} ${2:method}(${3})
+endsnippet
+
+snippet public
++ ${1:type} ${2:var}
+endsnippet
+snippet public2
++ ${1:type} ${2:method}(${3})
+endsnippet
+
+
+# activity
+snippet if
+if "${1}" then
+	-->[true] "${2}"
+else
+	-->[false] "${3}"
+endif
+endsnippet
+
+snippet synchronization
+===${1:B1}===
+
+snippet partition
+partition ${1:Partition} {
+	$0
+}
+endsnippet
