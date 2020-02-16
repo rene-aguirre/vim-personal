@@ -44,12 +44,12 @@ function! Runners()
     elseif (&ft=='c')
         command! Run up % | execute "Shell " . GetVar("cc", "cc") . " "
                     \ . GetVar("cc_flags",
-                        \ system("paste -s -d ' ' compile_flags.txt 2>/dev/null || echo '-std=c11 -Wall -Werror'"))
+                    \       system("cat  compile_flags.txt 2>/dev/null || echo '-std=c11 -Wall -Werror'"))
                     \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif (&ft=='cpp')
         command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
                     \ . GetVar("cxx_flags", 
-                        \ system("paste -s -d ' ' compile_flags.txt 2>/dev/null || echo '-std=c++17 -Wall -Werror'"))
+                    \       system("cat compile_flags.txt 2>/dev/null || echo '-std=c++17 -Wall -Werror'"))
                     \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif ((&ft=='rust') && filereadable("./Cargo.toml"))
         " Cargo managed project
