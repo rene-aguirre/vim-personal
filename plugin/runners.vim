@@ -30,7 +30,7 @@ function! Runners()
     elseif (&ft=='ruby')
         :command! Run up % | Shell ruby %
     elseif (&ft=='python')
-        command! Run up % | Shell python %
+        :command! Run up % | Shell python %
     elseif (&ft=='php')
         :command! Run up % | !php %
     elseif (&ft=='javascript' || &ft=='javascript.jsx')
@@ -42,21 +42,21 @@ function! Runners()
     elseif (&ft=='sh')
         :command! Run up % | Shell bash %
     elseif (&ft=='c')
-        command! Run up % | execute "Shell " . GetVar("cc", "cc") . " "
+        :command! Run up % | execute "Shell " . GetVar("cc", "cc") . " "
                     \ . GetVar("cc_flags",
                     \       system("cat  compile_flags.txt 2>/dev/null || echo '-std=c11 -Wall -Werror'"))
                     \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif (&ft=='cpp')
-        command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
+        :command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
                     \ . GetVar("cxx_flags", 
                     \       system("cat compile_flags.txt 2>/dev/null || echo '-std=c++17 -Wall -Werror'"))
                     \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif ((&ft=='rust') && filereadable("./Cargo.toml"))
         " Cargo managed project
         if (filereadable("./src/main.rs"))
-            command! Run up % | :Shell cargo run
+            :command! Run up % | :Shell cargo run
         else
-            command! Run up % | :Shell cargo run --bin %:t:r
+            :command! Run up % | :Shell cargo run --bin %:t:r
         endif
     elseif (&ft=='rust')
         " if outside of a project, just compile temporarily with rustc
