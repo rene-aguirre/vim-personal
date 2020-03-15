@@ -1,6 +1,12 @@
 # personal C language snippets
 # sorted alphabetically
 
+snippet author
+//
+// Created by ${1:`git config user.name`} on `date +%m/%d/%y`
+//
+${2}
+endsnippet
 snippet brief "doxygen brief comment"
 /**
  * @brief $0
@@ -20,7 +26,7 @@ case ${1:CONSTANT}:
 endsnippet
 
 snippet copyright
-// Copyright (C) `date +%Y` ${1:AUTHOR}. All rights reserved.
+// Copyright (C) `date +%Y` ${1:`git config user.name`}. All rights reserved.
 //
 // This document is the property of $1.
 // It is considered confidential and proprietary.
