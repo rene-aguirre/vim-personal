@@ -5,7 +5,8 @@ endsnippet
 snippet array
 # index: "${ARRAY[1]}", iterate: "${ARRAY[@]}"
 ${1:array_var}=(
-	${0:${VISUAL}}
+	# one value per line, or separate with spaces
+	${0:${VISUAL:item1}}
 )
 endsnippet
 
@@ -13,24 +14,45 @@ snippet bash
 #!/usr/bin/env bash
 endsnippet
 
-snippet cmdexists
-[ -x "$(command -v ${1:cmd})" ] ${2}
+snippet ifcmd
+[ -x "$(command -v ${1:${VISUAL:cmd}})" ] ${2}
+endsnippet
+
+snippet dolist
+for ${1:item} in ${2:${VISUAL:item1 item2 item3}}
+do
+	${3:echo $item}
+done
 endsnippet
 
 snippet fileexists
-[ -f ${1:filename} ] ${2}
+[ -f ${1:${VISUAL:filename}} ] ${2}
 endsnippet
 
 snippet forin
-for ${1:variable} in ${2:list} ; do
+for ${1:item} in ${2:"item1 item2"} ; do
 	${0:${VISUAL}}
 done
 endsnippet
 
 snippet forarray
-for ${1:variable} in "$${2:ARRAY}[@]" ; do
+declare -a ${1:StringArray}=( ${2:"Array" "Items" "with" "spaces"} )
+for ${3:item} in \${$1[@]}; do
 	${0:${VISUAL}}
 done
+endsnippet
+
+snippet forfiles
+for ${1:FILE_} in $(find ${2:.} -name "*.${3:txt}" -print); do
+	${4:echo "\${$1}"}
+done
+endsnippet
+
+snippet function
+${1:foo}() {
+	# output="\$($1 World)"
+	${2:${VISUAL:echo "Hello \$1"}}
+}
 endsnippet
 
 snippet sh
@@ -43,8 +65,8 @@ show_usage() {
 	echo -e "\nUsage:\n$0 [arguments] \n"
 }
 
-# needs more than 2 arguments ( <= 1 shows usage)
-if [  $# -le 1 ]; then
+# at least one argument
+if [  $# -lt 2 ]; then
 	show_usage
 	exit 1
 fi

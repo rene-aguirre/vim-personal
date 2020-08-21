@@ -46,10 +46,20 @@ function! Runners()
                     \ . GetVar("cc_flags",
                     \       system("cat  compile_flags.txt 2>/dev/null || echo '-std=c11 -Wall -Werror'"))
                     \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
+    elseif (&ft=='objc')
+        :command! Run up % | execute "Shell " . GetVar("cc", "cc") . " "
+                    \ . GetVar("cc_flags",
+                    \       system("cat  compile_flags.txt 2>/dev/null || echo '-Wall -Werror -fobjc-arc -fmodules -framework Foundation'"))
+                    \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif (&ft=='cpp')
         :command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
                     \ . GetVar("cxx_flags", 
                     \       system("cat compile_flags.txt 2>/dev/null || echo '-std=c++17 -Wall -Werror'"))
+                    \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
+    elseif (&ft=='objcpp')
+        :command! Run up % | execute "Shell " . GetVar("cxx", "c++") . " "
+                    \ . GetVar("cxx_flags", 
+                    \       system("cat compile_flags.txt 2>/dev/null || echo '-std=c++17 -Wall -Werror -fobjc-arc -fmodules -framework Foundation'"))
                     \ . " % -o vrun.out && ./vrun.out && rm vrun.out"
     elseif ((&ft=='rust') && filereadable("./Cargo.toml"))
         " Cargo managed project
@@ -67,6 +77,8 @@ function! Runners()
         :command! Run up % | !swift %
     elseif (&ft=='go')
         :command! Run up % | !go run %
+    elseif (&ft=='julia')
+        :command! Run up % | !julia %
     elseif (&ft=='vim')
         " how could I have forgotten?
         :command! Run up % | source %

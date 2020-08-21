@@ -133,25 +133,27 @@ snippet module "simple argparse template"
 
 """
 A python script template.
-
 """
 
 import sys
 import argparse
+import logging
 
 __version__ = "0.0.1"
 
+logger = logging.getLogger(__name__)
+
 def get_arg_parser():
-	"""Create CLI Argument parser instance
-	"""
+	"Create CLI Argument parser instance"
 	parser = argparse.ArgumentParser(description=__doc__,
 	                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-	parser.add_argument('infile', type=argparse.FileType('r'),
-	                    help="A required input file")
+	parser.add_argument('-i', '--infile', type=argparse.FileType('r'), default=sys.stdin,
+	                    help="Input file (defaults to stdin, if so a pipe is expected)")
 	parser.add_argument('-o', '--outfile', type=argparse.FileType('w'), default=sys.stdout,
-	                    help="Target output file")
-	parser.add_argument('-a', '--abacad', help='An option')
-	parser.add_argument('-b', '--blabacab', help="Another option")
+	                    help="Output file (defaults to stdout)")
+	parser.add_argument('-d', '--debug', action="store_true", help='Enable debug logging')
+	# parser.add_argument('-a', '--abacad', help='An option')
+	# parser.add_argument('-b', '--blabacab', help="Another option")
 
 	return parser
 
@@ -159,8 +161,16 @@ def main(arguments):
 	"""CLI standalone entry point"""
 	parser = get_arg_parser()
 	args = parser.parse_args(arguments)
+	if args.infile.isatty():
+		parser.print_help(sys.stderr)
+		return -1
+	if args.debug:
+		logging.getLogger().setLevel(logging.DEBUG)
+	${1:# print("Input: {}".format(args.infile.read()))}
+	return 0
 
 if __name__ == '__main__':
+	logging.basicConfig()
 	sys.exit(main(sys.argv[1:]))
 endsnippet
 
