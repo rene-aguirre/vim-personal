@@ -3,10 +3,25 @@
 
 extends c
 
+priority 10 # override C snippets
+
 snippet endl "end of line completion"
 << "\n";
+endsnippet
+
+snippet main
+#include <iostream>
+#include <cstdlib>
+
+int main (int argc, char *argv[])
+{
+	std::clog << "\nProgram " << argv[0] << "\n\n";
+
+	return EXIT_SUCCESS;
+}
 endsnippet
 
 snippet scast "static cast w/ visual"
 static_cast<$1>(${2:${VISUAL}})$0
 endsnippet
+
